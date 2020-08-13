@@ -2,10 +2,13 @@ import React, { useState } from 'react';
 import useSelect from '../hooks/useSelect';
 import { useEffect } from 'react';
 import axios from 'axios';
+import Error from './Error';
 
-const Form = () => {
+const Form = ({setData}) => {
     const [exchange, setExchange] = useState([])
     const [criptos, setCriptos] = useState([]);
+    const [error, setError] = useState(false);
+
     const [currency, Currency] = useSelect();
     const [cripto, Cripto] = useSelect();
 
@@ -34,6 +37,7 @@ const Form = () => {
             <div className="card light-blue">
                 <div className="card-content white-text">
                     <span className="card-title center-align">Cotiazar criptomoneda</span>
+                    <Error show={error} message='Todo los campos son obligatorios' />
                     <div className="row">
                         <div className="col s12">
                             <Currency defaultValue='Seleccionar la moneda origen' options={exchange}/>
