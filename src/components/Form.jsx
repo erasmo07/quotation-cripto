@@ -1,8 +1,9 @@
 import React from 'react';
-import styled from '@emotion/styled';
-import axios from 'axios';
+import useSelect from '../hooks/useSelect';
 
 const Form = () => {
+    const [currency, Currency] = useSelect('Selecciona la moneda origen', []);
+    const [cripto, Cripto] = useSelect('Selecciona la criptomoneda a cotizar', []);
 
     return ( 
         <form action="">
@@ -11,19 +12,12 @@ const Form = () => {
                     <span class="card-title center-align">Cotiazar criptomoneda</span>
                     <div class="row">
                         <div class="col s12">
-                            <select name="currency" className='browser-default'>
-                                <option value="">-- Selecciona la moneda origen --</option>
-                                <option value="DOP">Dominican Pesos</option>
-                            </select>
+                            <Currency />
                         </div>
-                        
                     </div>
                     <div className="row">
                         <div class="col s12">
-                            <select name="currency" className='browser-default'>
-                                <option value=""> -- Selecciona la criptomoneda a cotizar --</option>
-                                <option value="BTC">Bitcoin</option>
-                            </select>
+                            <Cripto />
                         </div>
                     </div>
                 </div>
