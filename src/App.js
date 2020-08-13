@@ -13,11 +13,11 @@ const Img = styled.img`
     margin-top: 5rem;
 `;
 
-
 const Container = styled.div`
     margin-top: 13rem;
 `;
 
+function App() {
   const [data, setData] = useState({ currency: '', cripto: ''});
   const [quotation, setQuotation] = useState({});
 
@@ -35,20 +35,19 @@ const Container = styled.div`
     makeQuotation();
   }, [data]);
 
-function App() {
   return (
     <Fragment>
-     <div className="row">
-       <div className="col s4">
-         <Img src={criptoImage} alt=""/>
-       </div>
-       <Container className="col s4">
-        <Form />
-       </Container>
-       <Container className="col s4">
-        <Quotation />
-       </Container>
-     </div>
+      <div className="row">
+        <div className="col s4">
+          <Img src={criptoImage} alt=""/>
+        </div>
+        <Container className="col s4">
+          <Form setData={setData} />
+        </Container>
+        <Container className="col s4">
+          <Quotation quotation={quotation} />
+        </Container>
+      </div>
     </Fragment>
   );
 }
