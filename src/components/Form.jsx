@@ -3,6 +3,7 @@ import useSelect from '../hooks/useSelect';
 import { useEffect } from 'react';
 import axios from 'axios';
 import Error from './Error';
+import PropTypes from 'prop-types';
 
 const Form = ({setData}) => {
     const [exchange, setExchange] = useState([])
@@ -68,6 +69,10 @@ const Form = ({setData}) => {
             </div>
         </form>
      );
+}
+
+Form.propTypes = {
+    setData: PropTypes.func.isRequired
 }
  
 export default Form;
