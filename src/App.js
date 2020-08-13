@@ -7,6 +7,7 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 
 import axios from 'axios';
+import Spinner from './components/Spinner';
 
 const Img = styled.img`
     max-width: 100%;
@@ -20,6 +21,7 @@ const Container = styled.div`
 function App() {
   const [data, setData] = useState({ currency: '', cripto: ''});
   const [quotation, setQuotation] = useState({});
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const makeQuotation = async () => {
@@ -32,7 +34,13 @@ function App() {
       setQuotation(resp.data.DISPLAY[data.cripto][data.currency]);
     }
     
-    makeQuotation();
+    setLoading(true);
+    
+    setTimeout(() => {
+      setLoading(false);
+      makeQuotation();
+    }, 3000);
+
   }, [data]);
 
   return (
@@ -45,7 +53,9 @@ function App() {
           <Form setData={setData} />
         </Container>
         <Container className="col s4">
-          <Quotation quotation={quotation} />
+          {loading 
+            ? <Spinner /> 
+            : <Quotation quotation={quotation} />}
         </Container>
       </div>
     </Fragment>

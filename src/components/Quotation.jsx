@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 const Quotation = ({ quotation }) => {
     if (Object.keys(quotation).length === 0) return null;
 
