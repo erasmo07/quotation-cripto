@@ -3,6 +3,10 @@ import criptoImage from './media/cryptomonedas.png';
 import styled from '@emotion/styled';
 import Form from './components/Form';
 import Quotation from './components/Quotation';
+import { useState } from 'react';
+import { useEffect } from 'react';
+
+import axios from 'axios';
 
 const Img = styled.img`
     max-width: 100%;
@@ -14,7 +18,22 @@ const Container = styled.div`
     margin-top: 13rem;
 `;
 
+  const [data, setData] = useState({ currency: '', cripto: ''});
+  const [quotation, setQuotation] = useState({});
 
+  useEffect(() => {
+    const makeQuotation = async () => {
+      if (data.currency === '' || data.cripto === '') return;
+
+      const url = `https://min-api.cryptocompare.com/data/pricemultifull?fsyms=${data.cripto}&tsyms=${data.currency}`;
+      const resp = await axios.get(url);
+
+      console.log(resp);
+      setQuotation(resp.data.DISPLAY[data.cripto][data.currency]);
+    }
+    
+    makeQuotation();
+  }, [data]);
 
 function App() {
   return (

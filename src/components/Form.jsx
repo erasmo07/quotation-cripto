@@ -32,8 +32,21 @@ const Form = ({setData}) => {
         searchCurrency();
     }, []);
 
+    const handleSubmit = e => {
+        e.preventDefault();
+
+        // validate inputs are valid
+        if (currency === "" || cripto === ""){
+            setError(true); 
+            return;
+        }
+
+        setError(false);
+        setData({currency, cripto});
+    }
+
     return ( 
-        <form action="">
+        <form onSubmit={handleSubmit}>
             <div className="card light-blue">
                 <div className="card-content white-text">
                     <span className="card-title center-align">Cotiazar criptomoneda</span>
